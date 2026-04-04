@@ -495,21 +495,51 @@
       color: rgba(240,236,224,0.35);
     }
 
-    /* ===== WHATSAPP BUTTON ===== */
-    .wa-btn {
-      position: fixed; bottom: 28px; right: 28px; z-index: 999;
-      width: 56px; height: 56px; border-radius: 50%;
-      background: #25d366; color: #fff; border: none;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      transition: all var(--transition); text-decoration: none;
+
+    /* ===== WHATSAPP POPUP ===== */
+    .wa-container { position:fixed; bottom:28px; right:28px; z-index:999; display:flex; flex-direction:column; align-items:flex-end; gap:12px; }
+    .wa-popup {
+      background: var(--surface); border-radius: 16px; overflow:hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.2); border: 1px solid var(--border);
+      width: 260px; opacity:0; transform: scale(0.9) translateY(10px);
+      pointer-events:none; transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+      transform-origin: bottom right;
     }
-    .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    .wa-popup.open { opacity:1; transform: scale(1) translateY(0); pointer-events:all; }
+    .wa-popup-header {
+      background: #25d366; color:#fff; padding:12px 16px;
+      font-size:0.85rem; font-weight:600;
+    }
+    .wa-agent {
+      display:flex; align-items:center; gap:12px; padding:12px 16px;
+      border-bottom:1px solid var(--border); transition: background var(--transition);
+      text-decoration:none; color: var(--text);
+    }
+    .wa-agent:last-child { border-bottom:none; }
+    .wa-agent:hover { background: var(--bg2); }
+    .wa-agent-avatar {
+      width:38px; height:38px; border-radius:50%; background:#25d366;
+      color:#fff; display:flex; align-items:center; justify-content:center;
+      font-weight:700; font-size:1rem; flex-shrink:0;
+    }
+    .wa-agent-name { font-weight:600; font-size:0.88rem; }
+    .wa-agent-role { font-size:0.75rem; color:var(--text2); margin-top:1px; }
+    .wa-btn {
+      width:56px; height:56px; border-radius:50%;
+      background:#25d366; color:#fff; border:none;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.6rem; box-shadow:0 4px 20px rgba(37,211,102,0.4);
+      transition:all var(--transition); cursor:pointer;
+    }
+    .wa-btn:hover { transform:scale(1.1); box-shadow:0 6px 28px rgba(37,211,102,0.6); }
     .wa-btn::before {
-      content: ''; position: absolute; inset: -4px; border-radius: 50%;
-      border: 2px solid rgba(37,211,102,0.4);
+      content:''; position:absolute; inset:-4px; border-radius:50%;
+      border:2px solid rgba(37,211,102,0.4);
       animation: pulse 2s ease-in-out infinite;
     }
+
+    /* ===== WHATSAPP BUTTON ===== */
+
     @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.15); opacity: 0.5; } }
 
     /* ===== ABOUT STRIP ===== */
@@ -833,7 +863,7 @@
           </div>
           <div class="form-group">
             <label>Teléfono</label>
-            <input type="tel" id="c-tel" placeholder="+54 9 351 000-0000" />
+            <input type="tel" id="c-tel" placeholder="(03541) 422898 / 433935" />
           </div>
           <div class="form-group">
             <label>¿Qué buscás?</label>
@@ -861,21 +891,21 @@
               <div class="info-item-icon">📍</div>
               <div class="info-item-text">
                 <div class="lbl">Dirección</div>
-                <div class="val">Av. San Martín 1456, Centro<br>Villa Carlos Paz, Córdoba</div>
+                <div class="val">Av. 9 de Julio 206 (ex 304)<br>Villa Carlos Paz, Córdoba</div>
               </div>
             </div>
             <div class="info-item">
               <div class="info-item-icon">📞</div>
               <div class="info-item-text">
                 <div class="lbl">Teléfono</div>
-                <div class="val">+54 9 351 000-0000</div>
+                <div class="val">(03541) 422898 / 433935</div>
               </div>
             </div>
             <div class="info-item">
               <div class="info-item-icon">✉️</div>
               <div class="info-item-text">
                 <div class="lbl">Email</div>
-                <div class="val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e48d8a828ba496858d87819794968b948d818085808197ca878b89">[email&#160;protected]</a></div>
+                <div class="val">comincini.inmob@gmail.com</div>
               </div>
             </div>
             <div class="info-item">
@@ -896,7 +926,7 @@
 
           <div class="map-embed">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.123456789!2d-64.4999!3d-31.4175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zVmlsbGEgQ2FybG9zIFBheg!5e0!3m2!1ses!2sar!4v1234567890"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.5!2d-64.4985!3d-31.4217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d6b5e9a2b9a1b%3A0x1234!2sAv.%209%20de%20Julio%20206%2C%20Villa%20Carlos%20Paz%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1700000000000"
               allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
@@ -936,9 +966,9 @@
       </div>
       <div class="footer-col">
         <h4>Contacto</h4>
-        <a href="tel:+5493510000000">📞 +54 9 351 000-0000</a>
-        <a href="/cdn-cgi/l/email-protection#adc4c3cbc2eddfccc4cec8dedddfc2ddc4c8c9ccc9c8de83cec2c0">✉️ <span class="__cf_email__" data-cfemail="7b12151d143b091a12181e080b09140b121e1f1a1f1e0855181416">[email&#160;protected]</span></a>
-        <a href="#">📍 Av. San Martín 1456, Carlos Paz</a>
+        <a href="tel:+5493510000000">📞 (03541) 422898 / 433935</a>
+        <a href="mailto:comincini.inmob@gmail.com">✉️ comincini.inmob@gmail.com</a>
+        <a href="#">📍 Av. 9 de Julio 206, Villa Carlos Paz</a>
         <a href="#">🕐 Lun–Vie 9:00–18:00</a>
       </div>
     </div>
@@ -949,7 +979,24 @@
 </footer>
 
 <!-- WHATSAPP BUTTON -->
-<a href="https://wa.me/5493510000000" class="wa-btn" target="_blank" title="Escribinos por WhatsApp">💬</a>
+<div class="wa-container" id="waContainer">
+  <div class="wa-popup" id="waPopup">
+    <div class="wa-popup-header">💬 Escribinos por WhatsApp</div>
+    <a href="https://wa.me/543541574049" target="_blank" class="wa-agent">
+      <div class="wa-agent-avatar">P</div>
+      <div><div class="wa-agent-name">Pablo Comincini</div><div class="wa-agent-role">Responsable · Mat. CCPI 1695</div></div>
+    </a>
+    <a href="https://wa.me/543541559232" target="_blank" class="wa-agent">
+      <div class="wa-agent-avatar">V</div>
+      <div><div class="wa-agent-name">Valentina</div><div class="wa-agent-role">Asesora comercial</div></div>
+    </a>
+    <a href="https://wa.me/543515054216" target="_blank" class="wa-agent">
+      <div class="wa-agent-avatar">S</div>
+      <div><div class="wa-agent-name">Sabrina</div><div class="wa-agent-role">Asesora comercial</div></div>
+    </a>
+  </div>
+  <button class="wa-btn" id="waBtn" onclick="toggleWA()" title="Escribinos por WhatsApp">💬</button>
+</div>
 
 <!-- PROPERTY MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -971,7 +1018,7 @@
       <div class="modal-specs" id="modalSpecs"></div>
       <div class="modal-actions">
         <button class="btn btn-primary" onclick="consultarProp()">📞 Consultar</button>
-        <a href="https://wa.me/5493510000000" class="btn btn-outline" target="_blank">💬 WhatsApp</a>
+        <a href="https://wa.me/543541574049" class="btn btn-outline" target="_blank">💬 WhatsApp</a>
       </div>
     </div>
     <div class="modal-status-bar">
@@ -1000,21 +1047,62 @@ const propImages = [
   'https://images.unsplash.com/photo-1628744448840-55bdb2497bd4?w=800&auto=format&fit=crop&q=80',
   'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&auto=format&fit=crop&q=80',
   'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1596436889106-be35e843f974?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1560184897-ae75f418493e?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1512916194211-3f2b7f5f7f1a?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=800&auto=format&fit=crop&q=80',
 ];
 
 let properties = [
-  { id:1, title:'Casa con Jardín en Zona Norte', tipo:'venta', precio:185000, moneda:'USD', ubicacion:'norte', ambientes:4, baños:2, m2:220, estado:'disponible', destacada:true, desc:'Hermosa casa familiar con amplio jardín, garage doble, cocina remodelada y excelente iluminación natural. A pasos de colegios y comercios.', img:0 },
-  { id:2, title:'Departamento Céntrico 2 Ambientes', tipo:'alquiler-anual', precio:95000, moneda:'ARS', ubicacion:'centro', ambientes:2, baños:1, m2:62, estado:'disponible', destacada:true, desc:'Moderno departamento a estrenar, totalmente amoblado, con vista a la calle y balcón. Ideal para pareja o profesionales.', img:1 },
-  { id:3, title:'Chalet Frente al Lago', tipo:'temporario', precio:8500, moneda:'ARS', ubicacion:'costas', ambientes:3, baños:2, m2:140, estado:'disponible', destacada:true, desc:'Espectacular chalet con frente al lago San Roque, deck privado, churrasquera y estacionamiento. Perfecto para vacaciones.', img:2 },
-  { id:4, title:'Casa 5 Ambientes - Barrio Privado', tipo:'venta', precio:320000, moneda:'USD', ubicacion:'norte', ambientes:5, baños:3, m2:380, estado:'vendida', destacada:false, desc:'Lujosa residencia en barrio privado con seguridad 24hs, pileta, quincho y piscina climatizada. Una joya del mercado.', img:3 },
-  { id:5, title:'Monoambiente Amoblado Centro', tipo:'alquiler-anual', precio:65000, moneda:'ARS', ubicacion:'centro', ambientes:1, baños:1, m2:38, estado:'vendida', destacada:false, desc:'Acogedor monoambiente totalmente equipado, piso 8 con vista panorámica al centro de la ciudad. Excelente acceso.', img:4 },
-  { id:6, title:'Casa Temporada - Frente al Río', tipo:'temporario', precio:6200, moneda:'ARS', ubicacion:'costas', ambientes:4, baños:2, m2:170, estado:'vendida', destacada:false, desc:'Casa de veraneo con frente al río, con playita privada y muelle. Capacidad para 8 personas, totalmente equipada.', img:5 },
-  { id:7, title:'Local Comercial - Av. Principal', tipo:'venta', precio:210000, moneda:'USD', ubicacion:'centro', ambientes:1, baños:1, m2:95, estado:'disponible', destacada:false, desc:'Excelente local comercial sobre avenida principal con gran vidriería, depósito y baño. Flujo constante de clientes.', img:6 },
-  { id:8, title:'Dúplex 3 Ambientes con Terraza', tipo:'alquiler-anual', precio:120000, moneda:'ARS', ubicacion:'sur', ambientes:3, baños:2, m2:110, estado:'reservada', destacada:false, desc:'Moderno dúplex con terraza privada, cocina integrada al living, dos dormitorios en planta alta y cochera cubierta.', img:7 },
-  { id:9, title:'Cabaña de Montaña 2 Dormitorios', tipo:'temporario', precio:4800, moneda:'ARS', ubicacion:'norte', ambientes:2, baños:1, m2:80, estado:'disponible', destacada:false, desc:'Romántica cabaña entre los árboles con chimenea, jacuzzi exterior y vistas a las sierras. Precio por noche en temporada alta.', img:8 },
-  { id:10, title:'Ph Zona Sur - 3 Ambientes', tipo:'venta', precio:145000, moneda:'USD', ubicacion:'sur', ambientes:3, baños:2, m2:180, estado:'disponible', destacada:true, desc:'PH luminoso con espacio privado en planta baja, patio exclusivo con parrilla, estacionamiento y baulera.', img:9 },
-  { id:11, title:'Loft Industrial Zona Norte', tipo:'alquiler-anual', precio:85000, moneda:'ARS', ubicacion:'norte', ambientes:1, baños:1, m2:55, estado:'disponible', destacada:false, desc:'Loft de diseño con techos altos, ladrillo visto y ventanales industriales. Totalmente renovado con criterio estético.', img:10 },
-  { id:12, title:'Casa Quinta con Pileta', tipo:'venta', precio:260000, moneda:'USD', ubicacion:'sur', ambientes:4, baños:3, m2:300, estado:'reservada', destacada:false, desc:'Amplia casa quinta con pileta, frutales, galería techada y garaje para 3 autos. Terreno de 1800m² en zona tranquila.', img:11 },
+  // ===== VENTA (12 propiedades) =====
+  { id:1,  title:'Casa con Jardín — Barrio Los Pinos',       tipo:'venta',         precio:185000, moneda:'USD', ubicacion:'norte',  ambientes:4, baños:2, m2:220, estado:'disponible', destacada:true,  desc:'Hermosa casa familiar con amplio jardín, garage doble y cocina remodelada. Excelente iluminación natural. A pasos de colegios y comercios. Lote de 600m².', img:0 },
+  { id:2,  title:'Casa 5 Ambientes — Barrio Privado',         tipo:'venta',         precio:320000, moneda:'USD', ubicacion:'norte',  ambientes:5, baños:3, m2:380, estado:'vendida',    destacada:false, desc:'Lujosa residencia en barrio privado con seguridad 24hs, pileta, quincho y piscina climatizada. Jardín de 800m² con riego automático.', img:3 },
+  { id:3,  title:'Local Comercial — Av. San Martín al 800',  tipo:'venta',         precio:210000, moneda:'USD', ubicacion:'centro', ambientes:1, baños:1, m2:95,  estado:'disponible', destacada:false, desc:'Excelente local sobre colectora Av. San Martín. Vidriería de piso a techo, depósito con acceso independiente y baño. Flujo constante de clientes.', img:6 },
+  { id:4,  title:'PH 3 Ambientes — Zona Sur con Patio',      tipo:'venta',         precio:145000, moneda:'USD', ubicacion:'sur',    ambientes:3, baños:2, m2:180, estado:'disponible', destacada:true,  desc:'PH luminoso en planta baja con patio exclusivo, parrilla, estacionamiento y baulera. Living amplio, cocina integrada. Excelente estado general.', img:9 },
+  { id:5,  title:'Casa Quinta con Pileta — Zona Sur',        tipo:'venta',         precio:260000, moneda:'USD', ubicacion:'sur',    ambientes:4, baños:3, m2:300, estado:'reservada',  destacada:false, desc:'Amplia casa quinta con pileta, frutales, galería techada y garaje para 3 autos. Terreno de 1800m² en zona tranquila y arbolada.', img:11 },
+  { id:6,  title:'Depto. Torre Serena — 1 Dormitorio',       tipo:'venta',         precio:98000,  moneda:'USD', ubicacion:'centro', ambientes:2, baños:1, m2:60,  estado:'disponible', destacada:true,  desc:'Departamento de categoría en Edificio Torre Serena. 1 dormitorio, estar-comedor, balcón con vista panorámica a las sierras. Edificio con amenities.', img:14 },
+  { id:7,  title:'Depto. 2 Dorm. Edificio Cariló — Cochera', tipo:'venta',         precio:135000, moneda:'USD', ubicacion:'centro', ambientes:3, baños:1, m2:75,  estado:'disponible', destacada:false, desc:'Edificio con pileta, SUM con asador, sala de juegos y solárium. 2 dormitorios, cocina completa, living comedor. Cochera cubierta incluida.', img:12 },
+  { id:8,  title:'Casa Moderna — Barrio Villa Domínguez',    tipo:'venta',         precio:175000, moneda:'USD', ubicacion:'norte',  ambientes:3, baños:2, m2:160, estado:'disponible', destacada:false, desc:'Casa moderna a estrenar con diseño contemporáneo, aberturas de aluminio, pisos de porcelanato y cocina equipada. Garage y jardín con deck.', img:15 },
+  { id:9,  title:'Local Av. Libertad N°46 — 20m²',           tipo:'venta',         precio:55000,  moneda:'USD', ubicacion:'centro', ambientes:1, baños:1, m2:20,  estado:'vendida',    destacada:false, desc:'Local comercial en Av. Libertad N° 46. Superficie de 20m², posee baño. Ubicación estratégica con alto tránsito peatonal y vehicular.', img:16 },
+  { id:10, title:'Casa 4 Amb. — Barrio Santa Rita',          tipo:'venta',         precio:220000, moneda:'USD', ubicacion:'sur',    ambientes:4, baños:2, m2:240, estado:'disponible', destacada:false, desc:'Amplia casa en barrio residencial tranquilo. 4 ambientes, 2 baños completos, lavadero, garage y gran patio con árboles frutales.', img:17 },
+  { id:11, title:'Depto. Lake Towers — 1 Dorm. con Pileta',  tipo:'venta',         precio:115000, moneda:'USD', ubicacion:'centro', ambientes:2, baños:1, m2:55,  estado:'disponible', destacada:false, desc:'Edificio Lake Towers — 3 piletas, agua caliente central, pre-instalación para aires. 1 dormitorio, cocina-estar-comedor. Vista al sector central del complejo.', img:13 },
+  { id:12, title:'Lote Residencial — Barrio Cerro Blanco',   tipo:'venta',         precio:42000,  moneda:'USD', ubicacion:'norte',  ambientes:0, baños:0, m2:450, estado:'disponible', destacada:false, desc:'Excelente lote residencial de 450m² en barrio cerrado. Escritura lista. Todos los servicios. Vistas a las sierras. Financiación propia disponible.', img:18 },
+
+  // ===== ALQUILER ANUAL (10 propiedades) =====
+  { id:13, title:'Depto. 2 Amb. Céntrico — Amoblado',        tipo:'alquiler-anual', precio:95000,  moneda:'ARS', ubicacion:'centro', ambientes:2, baños:1, m2:62,  estado:'disponible', destacada:true,  desc:'Moderno departamento amoblado con balcón y vista a la calle. Luminoso, 2° piso, edificio con ascensor. Ideal pareja o profesional. Expensas bajas.', img:1 },
+  { id:14, title:'Dúplex 3 Amb. con Terraza — Barrio Sur',   tipo:'alquiler-anual', precio:120000, moneda:'ARS', ubicacion:'sur',    ambientes:3, baños:2, m2:110, estado:'reservada',  destacada:false, desc:'Moderno dúplex con terraza privada y parrilla. Cocina integrada al living, 2 dormitorios en planta alta y cochera cubierta. Excelente estado.', img:7 },
+  { id:15, title:'Loft Industrial — Zona Norte',              tipo:'alquiler-anual', precio:85000,  moneda:'ARS', ubicacion:'norte',  ambientes:1, baños:1, m2:55,  estado:'disponible', destacada:false, desc:'Loft de diseño con techos altos, ladrillo visto y ventanales industriales. Totalmente renovado. Ideal para profesional o artista.', img:10 },
+  { id:16, title:'Depto. Edificio Bamba — 2 Dorm. Cochera',  tipo:'alquiler-anual', precio:130000, moneda:'ARS', ubicacion:'centro', ambientes:3, baños:1, m2:78,  estado:'disponible', destacada:false, desc:'Depto. muy luminoso en Edificio Bamba, San Martín esq. Garzón. 2 dormitorios, cocina amplia con lavadero, estar-comedor, cochera amplia. Edificio con parque y pileta.', img:19 },
+  { id:17, title:'Monoambiente — Centro con Vista Panorámica',tipo:'alquiler-anual', precio:65000,  moneda:'ARS', ubicacion:'centro', ambientes:1, baños:1, m2:38,  estado:'vendida',    destacada:false, desc:'Acogedor monoambiente en piso 8 con vista panorámica. Totalmente equipado y amoblado. Expensas incluidas. Ideal para profesional.', img:4 },
+  { id:18, title:'Local Comercial — Av. Libertad (alquiler)', tipo:'alquiler-anual', precio:75000,  moneda:'ARS', ubicacion:'centro', ambientes:1, baños:1, m2:30,  estado:'disponible', destacada:false, desc:'Local amplio sobre Av. Libertad con baño y depósito. Gran frente vidriado, ideal para comercio, consultorio o estudio. Alta circulación peatonal.', img:20 },
+  { id:19, title:'Casa 3 Amb. — Barrio Norte Tranquilo',      tipo:'alquiler-anual', precio:110000, moneda:'ARS', ubicacion:'norte',  ambientes:3, baños:1, m2:90,  estado:'disponible', destacada:false, desc:'Cómoda casa en barrio tranquilo. Living-comedor, 2 dormitorios, baño completo, cocina, lavadero y pequeño jardín con parrilla y estacionamiento.', img:21 },
+  { id:20, title:'Depto. Torre Serena — 2 Dorm. Amoblado',   tipo:'alquiler-anual', precio:145000, moneda:'ARS', ubicacion:'centro', ambientes:3, baños:1, m2:70,  estado:'disponible', destacada:false, desc:'Departamento en Torre Serena con 2 dormitorios, 1 baño, cocina-lavadero, estar-comedor. Amoblado y equipado. Cochera disponible. Vista a las sierras.', img:22 },
+  { id:21, title:'Casa 4 Amb. — Con Jardín y Cochera',        tipo:'alquiler-anual', precio:160000, moneda:'ARS', ubicacion:'sur',    ambientes:4, baños:2, m2:140, estado:'reservada',  destacada:false, desc:'Amplia casa familiar con jardín cerrado, parrilla, lavadero y garage para 2 autos. 3 dormitorios, 2 baños, living amplio y cocina completa.', img:23 },
+  { id:22, title:'Oficina/Consultorio — Centro (45m²)',        tipo:'alquiler-anual', precio:90000,  moneda:'ARS', ubicacion:'centro', ambientes:2, baños:1, m2:45,  estado:'disponible', destacada:false, desc:'Ideal para consultorio, estudio contable o jurídico. 2 ambientes, baño, cocina mínima. Edificio con ascensor, portería y seguridad. Av. principal.', img:24 },
+
+  // ===== TEMPORARIO (8 propiedades) =====
+  { id:23, title:'Chalet Frente al Lago San Roque',           tipo:'temporario',    precio:8500,   moneda:'ARS', ubicacion:'costas', ambientes:3, baños:2, m2:140, estado:'disponible', destacada:true,  desc:'Espectacular chalet con frente al Lago San Roque, deck privado, churrasquera y estacionamiento. Capacidad 6 personas. Paisaje único e irrepetible.', img:2 },
+  { id:24, title:'Casa Frente al Río — Verano en Carlos Paz', tipo:'temporario',    precio:6200,   moneda:'ARS', ubicacion:'costas', ambientes:4, baños:2, m2:170, estado:'vendida',    destacada:false, desc:'Casa de veraneo con frente al río San Antonio. Playita privada, muelle y deck. Capacidad 8 personas. Totalmente equipada, aire acondicionado.', img:5 },
+  { id:25, title:'Cabaña de Montaña con Jacuzzi Exterior',    tipo:'temporario',    precio:4800,   moneda:'ARS', ubicacion:'norte',  ambientes:2, baños:1, m2:80,  estado:'disponible', destacada:false, desc:'Romántica cabaña entre los árboles con chimenea a leña, jacuzzi exterior y vistas a las sierras. Capacidad 4 personas. Desayuno incluido en temporada.', img:8 },
+  { id:26, title:'Departamento Vacacional — Balcón Serrano',  tipo:'temporario',    precio:3500,   moneda:'ARS', ubicacion:'centro', ambientes:2, baños:1, m2:55,  estado:'disponible', destacada:false, desc:'Departamento vacacional a estrenar con balcón y vista a las sierras. Totalmente equipado, Wi-Fi, smart TV y ropa de cama. Para 4 personas.', img:25 },
+  { id:27, title:'Casa Amplia — Tanti para 10 Personas',      tipo:'temporario',    precio:9500,   moneda:'ARS', ubicacion:'sur',    ambientes:5, baños:3, m2:220, estado:'disponible', destacada:false, desc:'Gran casa en Tanti ideal para grupos o familias grandes. 5 ambientes, 3 baños, pileta, quincho con parrilla y fútbol. Amplio parque con arboleda.', img:26 },
+  { id:28, title:'Cabaña Duplex — Santa Cruz del Lago',       tipo:'temporario',    precio:5600,   moneda:'ARS', ubicacion:'costas', ambientes:2, baños:1, m2:70,  estado:'reservada',  destacada:false, desc:'Dúplex vacacional con vista al lago en Santa Cruz del Lago. Deck privado, parrilla, totalmente equipado. 4 personas, mascotas permitidas.', img:27 },
+  { id:29, title:'Estudio Vacacional — Centro Carlos Paz',    tipo:'temporario',    precio:2200,   moneda:'ARS', ubicacion:'centro', ambientes:1, baños:1, m2:35,  estado:'disponible', destacada:false, desc:'Moderno estudio para 2 personas, ideal pareja o mochileros. Wi-Fi de alta velocidad, smart TV, cocina equipada. A 2 cuadras del centro comercial.', img:28 },
+  { id:30, title:'Villa Exclusiva — Estancia Vieja',          tipo:'temporario',    precio:18000,  moneda:'ARS', ubicacion:'norte',  ambientes:6, baños:4, m2:400, estado:'disponible', destacada:true,  desc:'Villa de lujo en Estancia Vieja. 6 ambientes, 4 baños, pileta climatizada, cancha de tenis, personal de limpieza y seguridad privada. Capacidad 12 personas.', img:29 },
 ];
 
 let currentPropId = null;
